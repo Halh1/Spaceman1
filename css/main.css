@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+  }
+
+  header {
+    font-size: 80px;
+    text-align: center;
+  }
+
+ .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    
+  }
