@@ -1,7 +1,7 @@
 	/*----- constants -----*/
 const KEYWORD_LOOKUP = [
     "Mytery Machine",
-    "HexGirls",
+    "Hex Girls",
     "Scrappy Doo",
     "Ghost Clown",
     "Where Are You"
@@ -28,11 +28,12 @@ let hint = {};   // want to track how many hints they use up
 
 	/*----- cached elements  -----*/
 let imgEl = document.getElementById("body");
-let messageEl = document.querySelector("h1")
+let messageEl = document.querySelector("h1");
+let displayWord = document.getElementById("display");
 // cache the hint and restart button or just only have them as event listners
 
 	/*----- event listeners -----*/
-document.getElementById("letter").addEventListener("click", handleClick);
+let letterEl = document.getElementById("letter").addEventListener("click", handleClick);
 
 	/*----- functions -----*/
 
@@ -41,21 +42,24 @@ init();
 
 function init() {
     correct = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split('');
-    whatIsEntered = correct.map((letter)=> letter === "" ? "" : "_");
+    displayWord = correct.map((letter)=> letter === "" ? "" : "_");
     wrongGuess= [];
     hint = {};
 
     render();
 }
 
-function handleClick(evt) {
-    if (evt.currentTarget.id == "letter") {
-        console.log("letter click");
-    }
-function randomWord() {
-    correct = LETTERS_LOOKUP[Math.floor(math.random() * LETTERS_LOOKUP.length)];
-    alert(correct);
+function optionWord(){
+    whatIsEntered = correct.split("").map()
 }
+
+function handleClick(evt) {
+    if (evt.target.tagName == "BUTTTON") {
+        let key = evt.target.textContent;
+        } else {
+            whatIsEntered.value +=key;
+    }
+    render();
 }
  function render() {
     //renderRightWord();
