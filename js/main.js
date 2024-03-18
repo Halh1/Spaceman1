@@ -1,12 +1,12 @@
 	/*----- constants -----*/
-const LETTERS_LOOKUP = { // should i change this to letter order?
-    a: ["M", "y", "s", "t", "e", "r", "y", "M", "a", "c", "h", "i", "n", "e"],
-    b: ["H", "e", "x", "G", "i", "r", "l", "s"],
-    c: ["S", "c", "r", "a", "p", "p", "y", "D", "o", "o"],
-    d: ["G", "h", "o", "s", "t", "C", "l", "o", "w", "n"],
-    e: ["W", "h", "e", "r", "e", "A", "r", "e", "Y", "o", "u"]
-}
-const HINT_LOOKUP ={ // hint will actually auto fill some of the letters
+const KEYWORD_LOOKUP = [
+    "Mytery Machine",
+    "HexGirls",
+    "Scrappy Doo",
+    "Ghost Clown",
+    "Where Are You"
+]
+const HINT_LOOKUP ={
     a: "The van",
     b: "The girl Band",
     c: "Mini Scooby Doo",
@@ -15,11 +15,14 @@ const HINT_LOOKUP ={ // hint will actually auto fill some of the letters
 
 
 }
+const tries = 6;
 
 	/*----- state variables -----*/
-let rightLetters; // tracking what being submitted and if it matches keywords
-let correct; // track if they are winning or not
-let hint;   // want to track how many hints they use up
+let whatIsEntered = []; //tracking what is being entered?
+let correct = " "; // track if they are winning or not
+let wrongGuess= []; // tracking letters that are wrong
+let hint = {};   // want to track how many hints they use up
+
 
 
 
@@ -29,7 +32,7 @@ let messageEl = document.querySelector("h1")
 // cache the hint and restart button or just only have them as event listners
 
 	/*----- event listeners -----*/
-
+document.getElementById("letter").addEventListener("click", handleClick);
 
 	/*----- functions -----*/
 
@@ -37,22 +40,25 @@ init();
 //initalizing all state
 
 function init() {
-    rightLetters = {
-    a: ["null", "null", "null", "null", "null", "null", "y", "null", "null", "null", "null", "null", "null", "null"], //should i go the array route if so do you think i would neef the look up?
-    b: ["null", "null", "null", "null", "null", "null", "null", "null" ],
-    c: ["null", "null", "null", "null", "null", "null","null", "null", "null", "null"],
-    d: ["null", "null", "null", "null", "null", "null", "null", "null", "null", "null"],
-    e: ["null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null"]
-    };
-    // 1) question: does it make sense to have all values initalized or just one because there is only on word being worked on at a time?
-    correct = "unknown";    // wont need a winner function we just want an messaging saying correct or wrong try again
+    correct = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split('');
+    whatIsEntered = correct.map((letter)=> letter === "" ? "" : "_");
+    wrongGuess= [];
+    hint = {};
 
     render();
 }
 
-
+function handleClick(evt) {
+    if (evt.currentTarget.id == "letter") {
+        console.log("letter click");
+    }
+function randomWord() {
+    correct = LETTERS_LOOKUP[Math.floor(math.random() * LETTERS_LOOKUP.length)];
+    alert(correct);
+}
+}
  function render() {
-    renderRightWord();
-    renderCorrect();
+    //renderRightWord();
+    //renderCorrect();
 }
 
