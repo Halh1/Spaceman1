@@ -10,6 +10,9 @@
     font-size: 80px;
     text-align: center;
   }
+  h1 {
+    text-align: center;
+  }
 
  .flex-center {
     display: flex;
