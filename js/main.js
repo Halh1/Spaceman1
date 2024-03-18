@@ -19,8 +19,8 @@ const tries = 6;
 
 	/*----- state variables -----*/
 let whatIsEntered = []; //tracking what is being entered?
-let correct = " "; // track if they are winning or not
-let wrongGuess= []; // tracking letters that are wrong
+let correctLetters = " "; // track if they are winning or not
+let wrongLetters= []; // tracking letters that are wrong
 let hint = {};   // want to track how many hints they use up
 
 
@@ -41,16 +41,16 @@ init();
 //initalizing all state
 
 function init() {
-    correct = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split('');
-    displayWord = correct.map((letter)=> letter === "" ? "" : "_");
-    wrongGuess= [];
+    correctLetters = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split('');
+    displayWord = correctLetters.map((letter)=> letter === "" ? "" : "_");
+    wrongLetters= [];
     hint = {};
 
     render();
 }
 
 function optionWord(){
-    whatIsEntered = correct.split("").map()
+    whatIsEntered = correctLetters.split("").map()
 }
 
 function handleClick(evt) {
