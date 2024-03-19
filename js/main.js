@@ -17,7 +17,7 @@ let winner; //tracking winnings
 	/*----- cached elements  -----*/
 let imgEl = document.getElementById("body");
 let messageEl = document.querySelector("h1");
-//let displayWord = document.getElementById("display");
+let displayWord = document.getElementById("display");
 // cache the hint and restart button or just only have them as event listners
 
 	/*----- event listeners -----*/
@@ -29,26 +29,15 @@ init();
 //initalizing all state
 
 function init() {
-    correctLetters = "" // should I randomize the hint and the keywords together?
-    displayWord = [];
-    console.log(correctLetters, displayWord);
+    correctLetters = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split(''); // should I randomize the hint and the keywords together?
+    displayWord.innerHTML = correctLetters.map((letter)=> letter === "" ? "" : "_").join(" ");
     wrongLetters = [];
     hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
     render();
 }
 
-function randomizeWord(){
-    correctLetters = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split('');
-}
 
-function chosenWord() {
-    displayWord =  correctLetters.map((letter)=> letter === "" ? "" : "_");
-    document.getElementById("display").innerHTML = displayWord;
 
-}
-
-randomizeWord();
-chosenWord();
 //function checkRightLetters() 
 
 function handleClick(event) {
@@ -85,13 +74,5 @@ checking if its correct:
 
 
 /*
-redoing init real quick?
-function init() {
-    correctLetters = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split(''); // should I randomize the hint and the keywords together?
-    displayWord = correctLetters.map((letter)=> letter === "" ? "" : "_");
-    console.log(correctLetters, displayWord);
-    wrongLetters = [];
-    hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
-    render();
-}
+
 */
