@@ -18,10 +18,13 @@ let winner; //tracking winnings
 let imgEl = document.getElementById("body");
 let messageEl = document.querySelector("h1");
 let displayWord = document.getElementById("display");
+let letterEl = document.querySelector(".letters");
+let restart = document.getElementById("reset")
 // cache the hint and restart button or just only have them as event listners
 
 	/*----- event listeners -----*/
-let letterEl = document.querySelector(".letters").addEventListener("click", handleClick);
+letterEl.addEventListener("click", handleClick);
+restart.addEventListener("click", init);
 
 	/*----- functions -----*/
 
@@ -38,12 +41,15 @@ function init() {
 
 
 
-//function checkRightLetters() 
+function checkRightLetters() {
+    if(correctLetters.includes(key)) return;
+}
 
 function handleClick(event) {
     let key;
-    key = event.target.textContent;
-    if (event.target.tagName == "BUTTON") return;
+    if (event.target.tagName == "BUTTON") {
+        key = event.target.textContent;
+    }
     render();
 }
 
