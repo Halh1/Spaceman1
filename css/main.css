@@ -4,6 +4,7 @@
 
   body {
     height: 100vh;
+
   }
 
   header {
@@ -12,7 +13,7 @@
   }
   h1 {
     text-align: center;
-    display: none;
+
 
   }
 
@@ -22,3 +23,8 @@
     align-items:  center;
     
   }
+#reset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
