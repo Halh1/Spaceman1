@@ -1,5 +1,5 @@
 	/*----- constants -----*/
-const KEYWORD_LOOKUP = ["MYSTERY MACHINE", "HEX GIRLS", "SCRAPPY DOO", "GHOST CLOWN", "WHERE ARE YOU?"]
+const KEYWORD_LOOKUP = ["MYSTERYMACHINE", "HEXGIRLS", "SCRAPPYDOO", "GHOSTCLOWN", "WHEREAREYOU"]
 const HINT_LOOKUP = ["The van", "The girl Band", "Mini Scooby Doo", "The circus villan", "Famous 3 words"];
 
 const tries = 6;
@@ -16,7 +16,7 @@ let loss;
 
 
 	/*----- cached elements  -----*/
-let imgEl = document.querySelector("img");
+let imgEl = document.querySelector(".pumpkin");
 let messageEl = document.getElementById("status");
 let displayWord = document.getElementById("display");
 let letterEl = document.getElementById("keyboard");
@@ -39,8 +39,7 @@ function init() {
     displayWord.innerText = correctLetters.map((letter)=> letter === "" ? "" : "_").join(" ");
     currentWord = [];
     wrongLetters = [];
-   // hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
-    hintEl.style.visibility = "hidden";
+    hintEl.style.visibility = "hidden"; // hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
     imgEl.style.visibility = "hidden";
     messageEl.innerText = "Guess!";
     win = null;
@@ -57,16 +56,21 @@ function handleClick(event) {
     //console.log(key);
     if(correctLetters.includes(key)) {
         correctLetters.forEach((char, idx) => {
-            if (char === key) displayWord[idx].innerText = key;
+            if (char === key) {
+                const displayWordArr = displayWord.innerText.split("")
+                displayWordArr[idx] = key;
+                console.log(displayWordArr);
+                displayWord.innerText = displayWordArr.join(""); 
+            }
        
         });
         } else {
             wrongLetters.push(key);
         }  
-        alert(correctLetters); 
-        alert(wrongLetters);
+       // alert(correctLetters); 
+        //alert(wrongLetters);
         loss = checkLoss();
-        render();
+        //render();
 }
 
 function checkLoss() {
@@ -85,11 +89,10 @@ function handleHint (event){
     if (event.target.tagName === "BUTTON") {
        hint = HINT_LOOKUP[Math.floor(Math.random() * HINT_LOOKUP.length)];
        hint.style.visibility = "visible"; 
-       alert(hint);
     }
 }
 //function checkWin() {
-//} // not working b/c i need to fix array
+//} 
 
 
 //function renderImg(){
