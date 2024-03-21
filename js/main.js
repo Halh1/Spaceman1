@@ -10,7 +10,7 @@ let correctLetters; // track if they are winning or not
 let wrongLetters; // tracking letters that are wrong
   // want to track how many hints they use up
 let currentWord;
-let winner; //tracking winnings 
+let win; //tracking winnings 
 let loss;
 
 
@@ -27,7 +27,7 @@ let hintEl = document.getElementById("Hints-list");
 	/*----- event listeners -----*/
 letterEl.addEventListener("click", handleClick);
 restart.addEventListener("click", init);
-//hintEl.addEventListener("click", )
+hintEl.addEventListener("click", handleHint);
 
 	/*----- functions -----*/
 
@@ -39,10 +39,11 @@ function init() {
     displayWord.innerText = correctLetters.map((letter)=> letter === "" ? "" : "_").join(" ");
     currentWord = [];
     wrongLetters = [];
-    hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
-    hintEl.style.display = "none";
+   // hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
+    hintEl.style.visibility = "hidden";
     imgEl.style.visibility = "hidden";
     messageEl.innerText = "Guess!";
+    win = null;
     loss = null;
 
    // render();
@@ -56,7 +57,7 @@ function handleClick(event) {
     //console.log(key);
     if(correctLetters.includes(key)) {
         correctLetters.forEach((char, idx) => {
-            if (char === key) displayWord[idx].innerHTML = key;
+            if (char === key) displayWord[idx].innerText = key;
        
         });
         } else {
@@ -79,6 +80,14 @@ function checkLoss() {
     };
 } 
 
+function handleHint (event){
+    let hint = event.target;
+    if (event.target.tagName === "BUTTON") {
+       hint = HINT_LOOKUP[Math.floor(Math.random() * HINT_LOOKUP.length)];
+       hint.style.visibility = "visible"; 
+       alert(hint);
+    }
+}
 //function checkWin() {
 //} // not working b/c i need to fix array
 
