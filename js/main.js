@@ -1,5 +1,5 @@
 	/*----- constants -----*/
-const KEYWORD_LOOKUP = ["MYSTERY MACHINE", "HEX GIRLS", "SCRAPPY DOO", "GHOST CLOWN", "WHERE ARE YOU"]
+const KEYWORD_LOOKUP = ["MYSTERY MACHINE", "HEX GIRLS", "SCRAPPY DOO", "GHOST CLOWN", "WHERE ARE YOU?"]
 const HINT_LOOKUP = ["The van", "The girl Band", "Mini Scooby Doo", "The circus villan", "Famous 3 words"];
 
 const tries = 6;
@@ -16,7 +16,7 @@ let loss;
 
 
 	/*----- cached elements  -----*/
-let imgEl = document.getElementById("image");
+let imgEl = document.querySelector("img");
 let messageEl = document.getElementById("status");
 let displayWord = document.getElementById("display");
 let letterEl = document.getElementById("keyboard");
@@ -41,7 +41,7 @@ function init() {
     wrongLetters = [];
     hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
     hintEl.style.display = "none";
-    imgEl.style.display ="none";
+    imgEl.style.visibility = "hidden";
     messageEl.innerText = "Guess!";
     loss = null;
 
@@ -51,12 +51,12 @@ function init() {
 
 
 function handleClick(event) {
-    const key = event.target.textContent
+    const key = event.target.textContent;
     if (event.target.tagName === "BUTTON");
     //console.log(key);
     if(correctLetters.includes(key)) {
         correctLetters.forEach((char, idx) => {
-            if (char === key) displayWord[idx].innerText = key;
+            if (char === key) displayWord[idx].innerHTML = key;
        
         });
         } else {
@@ -67,22 +67,20 @@ function handleClick(event) {
         loss = checkLoss();
         render();
 }
+
 function checkLoss() {
     if (wrongLetters.length < tries) {
         messageEl.innerText = "Try again";
-        imgEl.src = `img/Scooby-Doo${wrongLetters.length}.jpg`;
-        imgEl.style.display = "block";
+        imgEl.src = `img/Pumpkin ${wrongLetters.length}.png`;
+        imgEl.style.visibility = "visible";
     } else {
-        messageEl.innerText = "Game Over!";
-        imgEl.src = `img/Scooby-Doo 0.jpg`;
-    }
-
-    
+        messageEl.innerText = `Game Over! The word was ${correctLetters.join("")}` ;
+        imgEl.src = `img/Pumpkin 6.png`;
+    };
 } 
 
-function checkWin() {
-    if (currentWord.length === correctLetters.length) messageEl.innerText = "You've won!";
-} // not working b/c i need to fix array
+//function checkWin() {
+//} // not working b/c i need to fix array
 
 
 //function renderImg(){
