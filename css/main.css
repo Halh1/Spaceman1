@@ -28,3 +28,12 @@
     justify-content: center;
     align-items: center;
 }
+#image img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.scooby {
+    max-width: 250px;
+    max-height: 250px;
+}
