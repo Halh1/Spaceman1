@@ -1,9 +1,9 @@
-	/*----- constants -----*/
+/*----- constants -----*/
 const KEYWORD_LOOKUP = ["MYSTERYMACHINE", "HEXGIRLS", "SCRAPPYDOO", "GHOSTCLOWN", "WHEREAREYOU"];
 
 const tries = 6;
 
-	/*----- state variables -----*/
+/*----- state variables -----*/
 let entered;
 let correctLetters;
 let wrongLetters;
@@ -13,18 +13,18 @@ let gameStatus;
 
 
 
-	/*----- cached elements  -----*/
+/*----- cached elements  -----*/
 let imgEl = document.querySelector(".pumpkin");
 let messageEl = document.getElementById("status");
 let displayWord = document.getElementById("display");
 let letterEl = document.getElementById("keyboard");
 let restart = document.getElementById("reset");
 
-	/*----- event listeners -----*/
+/*----- event listeners -----*/
 letterEl.addEventListener("click", handleClick);
 restart.addEventListener("click", init);
 
-	/*----- functions -----*/
+/*----- functions -----*/
 
 init();
 
@@ -46,21 +46,21 @@ function init() {
 function handleClick(event) {
     if (event.target.tagName !== "BUTTON") return;
     const key = event.target.textContent;
-    if(correctLetters.includes(key)) {
+    if (correctLetters.includes(key)) {
         correctLetters.forEach((char, idx) => {
             if (char === key) {
-                currentWord[idx] = key; 
-            }; 
+                currentWord[idx] = key;
+            };
         });
         displayWord.innerText = currentWord.join(" ");
-        } else {
-            wrongLetters.push(key);
-        };  
-        gameStatus = checkGameStatus();
-    
+    } else {
+        wrongLetters.push(key);
+    };
+    gameStatus = checkGameStatus();
+
 }
 
-function  checkGameStatus() {
+function checkGameStatus() {
     if (!currentWord.includes("_")) {
         messageEl.innerText = "You've won!";
     };
@@ -69,10 +69,10 @@ function  checkGameStatus() {
         imgEl.src = `./img/pumpkin${wrongLetters.length}.png`;
         imgEl.style.visibility = "visible";
     } else if (wrongLetters.length === tries) {
-        messageEl.innerText = `Game Over! It was ${correctLetters.join("")}` ;
+        messageEl.innerText = `Game Over! It was ${correctLetters.join("")}`;
         imgEl.src = `./img/pumpkin6.png`;
     };
-} 
+}
 
 
 
