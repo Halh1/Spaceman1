@@ -72,12 +72,12 @@ function handleClick(event) {
 
 function  checkGameStatus() {
     if (wrongLetters.length < tries && wrongLetters.length > 0) {
-        messageEl.innerText = "Zoinks Try Again";
+        messageEl.innerText = "Zoinks!Try Again";
         imgEl.src = `./img/pumpkin${wrongLetters.length}.png`;
         imgEl.style.visibility = "visible";
     } else if (wrongLetters.length === tries) {
         messageEl.innerText = `Game Over! The word was ${correctLetters.join("")}` ;
-        imgEl.src = `./img/pumpkin5.png`;
+        imgEl.src = `./img/pumpkin6.png`;
     } else if (!currentWord.includes("_")) {
         messageEl.innerText = "You've won!";
     }
