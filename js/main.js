@@ -65,11 +65,11 @@ function checkGameStatus() {
     };
     if (wrongLetters.length < tries && wrongLetters.length > 0) {
         messageEl.innerText = "Zoinks! Try Again";
-        imgEl.src = `./img/pumpkin${wrongLetters.length}.png`;
+        imgEl.src = `../img/pumpkin${wrongLetters.length}.png`;
         imgEl.style.visibility = "visible";
     } else if (wrongLetters.length === tries) {
         messageEl.innerText = `Game Over! It was ${correctLetters.join("")}`;
-        imgEl.src = `./img/pumpkin6.png`;
+        imgEl.src = `../img/pumpkin6.png`;
     };
 }
 
