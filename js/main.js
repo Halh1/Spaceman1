@@ -8,10 +8,9 @@ const tries = 6;
 let entered; //tracking what is being entered?
 let correctLetters; // track if they are winning or not
 let wrongLetters; // tracking letters that are wrong
-  // want to track how many hints they use up
+let displayWordArr;  // want to track how many hints they use up
 let currentWord;
-let win; //tracking winnings 
-let loss;
+let gameStatus;
 
 
 
@@ -36,8 +35,8 @@ init();
 
 function init() {
     correctLetters = KEYWORD_LOOKUP[Math.floor(Math.random() * KEYWORD_LOOKUP.length)].split(''); // should I randomize the hint and the keywords together?
-    displayWord.innerText = correctLetters.map((letter)=> letter === "" ? "" : "_").join(" ");
-    currentWord = [];
+    currentWord = correctLetters.map(() => "_");
+    displayWord.innerText = currentWord.join(" ");
     wrongLetters = [];
     hintEl.style.visibility = "hidden"; // hint = []; //Trying to find away to connect the randomization of correctLetters with it's matching hint.
     imgEl.style.visibility = "hidden";
@@ -51,57 +50,45 @@ function init() {
 
 
 function handleClick(event) {
+    if (event.target.tagName !== "BUTTON") return;
     const key = event.target.textContent;
-    if (event.target.tagName === "BUTTON");
     //console.log(key);
     if(correctLetters.includes(key)) {
         correctLetters.forEach((char, idx) => {
             if (char === key) {
-                const displayWordArr = displayWord.innerText.split("")
-                displayWordArr[idx] = key;
-                console.log(displayWordArr);
-                displayWord.innerText = displayWordArr.join(""); 
-            }
-       
+                currentWord[idx] = key 
+            } 
         });
+        displayWord.innerText = currentWord.join(" ");
         } else {
             wrongLetters.push(key);
-        }  
+        };  
        // alert(correctLetters); 
         //alert(wrongLetters);
-        loss = checkLoss();
+        //win = checkWin();
+        gameStatus = checkGameStatus();
         //render();
 }
 
-function checkLoss() {
-    if (wrongLetters.length < tries) {
-        messageEl.innerText = "Try again";
-        imgEl.src = `img/Pumpkin ${wrongLetters.length}.png`;
+function  checkGameStatus() {
+    if (wrongLetters.length < tries && wrongLetters.length > 0) {
+        messageEl.innerText = "Zoinks Try Again";
+        imgEl.src = `./img/pumpkin${wrongLetters.length}.png`;
         imgEl.style.visibility = "visible";
-    } else {
+    } else if (wrongLetters.length === tries) {
         messageEl.innerText = `Game Over! The word was ${correctLetters.join("")}` ;
-        imgEl.src = `img/Pumpkin 6.png`;
-    };
+        imgEl.src = `./img/pumpkin5.png`;
+    } else if (!currentWord.includes("_")) {
+        messageEl.innerText = "You've won!";
+    }
+
 } 
 
 function handleHint (event){
     let hint = event.target;
-    if (event.target.tagName === "BUTTON") {
+    if (event.target.tagName !== "BUTTON") {
        hint = HINT_LOOKUP[Math.floor(Math.random() * HINT_LOOKUP.length)];
        hint.style.visibility = "visible"; 
     }
 }
-//function checkWin() {
-//} 
 
-
-//function renderImg(){
-    //imgEl.src = `img/Scooby-Doo ${wrongLetters.length}.jpg`;
-//}
-
-
-//function for which hint, if correctletter === keylook[0] then hint === hintlook[0]
-// function render() {
-  //  imgEl.src = `img/Scooby-Doo ${wrongLetters.length - tries}.jpg`;
-
-//} 
