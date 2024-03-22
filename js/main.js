@@ -4,7 +4,6 @@ const KEYWORD_LOOKUP = ["MYSTERYMACHINE", "HEXGIRLS", "SCRAPPYDOO", "GHOSTCLOWN"
 const tries = 6;
 
 /*----- state variables -----*/
-let entered;
 let correctLetters;
 let wrongLetters;
 let displayWordArr;
